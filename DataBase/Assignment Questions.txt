@@ -1,0 +1,257 @@
+
+                                               ***ASSIGNMENT QUESTION***
+
+
+
+ Q1.How to creat an table student write an SQLQuery ?
+
+ ANS:- CREAT TABLE student(Rollno INT PRIMARY KEY,NAME VARCHAR(30),Branch VARCHAR(40));
+
+
+ Q2.How to creat a Exam table with Foreign key on rollno write a SQL Query?
+
+ Ans:- CREAT TABLE Exam (Rollno INT,S_code VARCHAR(30),Marks INT,P_code VARCHAR(30),foreign key(Rollno) reference student(Rollno));
+
+
+ Q3.What is SQL Key Constraints; write an Example of SQL Key Constraint?
+
+ ANS:- CREAT TABLE table_name(column1 data_type constraint,column2 data_type constraint,column3 data_type constraint);
+ => Unique key (column can not have a NULL values)
+ => Primary Key ( combination of not NULL and unique)
+ => Foreign Key ( connect two table for use another table record)
+
+
+ Q4.What is SQL View Create a view of Student Table?
+
+ ANS:- select *from Student Table; 
+
+
+ Q5.How to create table user write a SQL query?
+
+ ANS:- CREATE TABLE USER (Firstname VARCHAR(20),Lastname VARCHAR(20),address VARCHAR(50),city VARCHAR(30),age INT);
+
+
+ Q6.What is SQL and how to create a table with Foreign Key ? 
+
+ ANS:- CREAT TABLE Exam (Rollno VARCHAR(30),Marks INT,P_code VARCHAR(30),Foreign Key(Rollno) reference student(Rollno));
+
+
+ Q7.What is store Procedure write a query of creating store Procedure ?
+
+ ANS:-
+ DELIMITER $$
+
+ CREATE
+   
+   procedure procedure_name()
+	
+   BEGIN
+
+	select *from table_name where id=100;
+        (ENTER YOUR TABLE ID NUMBER)
+
+        END $$
+
+ DELIMITER;
+
+
+ Q8.What is save point How to Create a save Point write a Query ?
+
+ ANS:- 
+
+ START TRANSACTION;
+
+ delete from table_name where id=2 -- (ENTER YOUR TABLE ID)
+
+ savepoint a;
+
+ update name='rahul' from table_name where id=3;
+
+ rollback;
+
+
+ Q9.What is trigger and how to Create a Trigger in SQL ?
+
+ ANS:-
+ 
+ create 
+
+    trigger `database_name`.`update_name` before delete
+
+                 on `database_name`.`table_name`
+
+            for each row begin
+
+   insert into new_table_name(id,name,email) values (old.id,old.name,old.email);
+
+   end $$
+
+
+ Q14.What is DDL Interpreter ?
+
+ ANS:-
+
+  The DDL COMMANDS are
+     1.CREATE DATABASE
+     2.ALTER TABLE
+     3.DROP TABLE OR DATABASE
+     4.TRUNCATE TABLE                    
+	
+
+ I1.Get First_Name from employee table using alias name "Employee Name".
+
+ ANS:-
+
+ select first_name,year(joinning_year),month(Joinning_month),date(joinning) from table_name;
+
+
+ I2.Get FIRST_NAME,Joinning Year,Joinning Month and Joinning Date from employee table.
+
+ Ans:- 
+
+ select first_name,year (joinning_Year),month(joinning_month),date(joining_date) from table_name;
+
+
+ I3.Get all employee details from the employee table order by First_Name Ascending and Salary Descending.
+
+ ANS:- 
+
+ select * from employee order by First_Name;
+
+ select * from employee order by salary desc;
+
+
+ I4.Get employee details from employee table whose first name contains 'o'.
+
+ select * from employee where name like 'O%';
+
+
+ I5.Get employee details from employee table whose joining month is "January".
+
+ ANS:- 
+
+ select *from employee where month = 'January'(joining_month);
+
+
+ I6.Get department,total salary with respect to a department from employee table order by total salary descending.
+ ANS:-
+
+ select department,sum(salary) total_salary from employee group by department order by total_salary desc;
+
+
+ I7.Get department wise maximum salary from employee table order by salary ascending.
+
+ ANS:-
+
+ select department ,max(salary) max_salary from employee group by department order by max_salary;	
+
+
+ I8.select first_name,incentive amount from employee and incentives table for those employees who have incentives and incentive amount greater
+    than 3000.
+ ANS:-
+
+ select first_name,incentive_amount from employee inner join incentive on employee_id=employee_ref_id where incentive_amount > 3000;
+
+
+ I9.select 2nd Highest salary from employee table.
+
+ ANS:-
+ select max(salary) from employee where salary < (select max(salary) from employee);
+
+
+ I10.Select first_name,incentive amount from employee and incentives table for all employee who got incentives using left join.
+
+ ANS:-
+
+ select employee.first_name,incentive.incentive_ammount from employee left join incentive i on i.employee_ref_id = e.employee_id;
+
+
+ I11.Create view OF Employee table in which store first name,last name and salary only.
+
+ ANS:-
+
+ create view Emp_detail as select first_name,last_name,salary from employee;
+
+
+ I12.Create Procedure to find out department wise highest salary.
+
+ ANS:-
+
+ CREATE PROCEDURE max_salary () 
+
+ BEGIN
+
+ select department,max(salary) from employee group by department
+
+ END;
+
+
+ I13.Create After Insert trigger bon Employee table which insert records in view table.
+
+ ANS:-
+
+ DELIMETER $$
+
+ create 
+     trigger update after insert on students
+  
+     for each row begin
+
+     insert into new_table_name (id,name,email) values (old.id,old.name,old.email);
+
+ end$$
+
+     DELIMITER;
+
+
+ A1.All orders for more than $1000.
+
+ ANS:- select * from table_name where amount > $1000.
+
+
+ A2.Names and cities of all salespeople in London with commission above 0.10.
+
+ ANS:- select sname,city from table_name where comm > 0.10 and city ='London';
+
+
+ A8.All salespeople either in Barcelona or in London.
+
+ ANS:- select * from salesperson where city in ('barcelona','london');
+
+
+ A9.All salespeople with commission between 0.10 and0.12.(Boundary values should be excluded).
+
+ ANS:- select * from salesperson where comm between 0.12 and0.12;
+
+
+ A10.All customers excluding those with rating <= 100 unless they are located in Rome.
+
+ ANS:- select * from customer where rating  <= 100 or city = 'rome';
+
+
+ A11.All order except those with 0 or NULL value in amt field.
+
+ ANS:-
+
+ select count(distinct sno) from orders;
+
+
+ A12.Count the number of salespeople currently listing orders in the order table.
+
+ ANS:-
+
+ select count (distinct sno) from orders;
+
+
+ A13.Largest order taken by each salesperson,datawise.
+
+ ANS:-
+
+ select max(amt) from orders group by ODE,sno order by ODE,sno;
+
+
+ A14.Largest order taken by each salesperson with order value more than $3000. (ie same city).
+
+ ANS:-
+ 
+ select max(amt) from orders where amt > 3000;
